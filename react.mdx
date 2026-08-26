@@ -54,6 +54,61 @@ export const CopySnippet = () => {
   )
 }
 
+export const StatCounter = ({ value, suffix = "", label, duration = 1400 }) => {
+  const [display, setDisplay] = useState(0)
+  const ref = useRef(null)
+  const started = useRef(false)
+
+  useEffect(() => {
+    const node = ref.current
+    if (!node) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !started.current) {
+            started.current = true
+            const start = performance.now()
+
+            const tick = (now) => {
+              const progress = Math.min((now - start) / duration, 1)
+              const eased = 1 - Math.pow(1 - progress, 3)
+              setDisplay(Math.round(eased * value))
+              if (progress < 1) requestAnimationFrame(tick)
+            }
+
+            requestAnimationFrame(tick)
+          }
+        })
+      },
+      { threshold: 0.3 }
+    )
+
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [value, duration])
+
+  return (
+    <div className="stat-counter" ref={ref}>
+      <span className="stat-counter-value">
+        {display}
+        {suffix}
+      </span>
+      <span className="stat-counter-label">{label}</span>
+    </div>
+  )
+}
+
+export const StatCounterGroup = () => {
+  return (
+    <div className="stat-counter-group not-prose">
+      <StatCounter value={500} suffix="+" label="Cups of coffee" />
+      <StatCounter value={42} label="Docs pages shipped" />
+      <StatCounter value={99} suffix="%" label="Uptime" />
+    </div>
+  )
+}
+
 export const FeedbackWidget = () => {
   const [feedback, setFeedback] = useState(null)
 
@@ -119,5 +174,13 @@ export const FeedbackWidget = () => {
 </Accordion>
 
 <Accordion title="Animated stat counter" defaultOpen={false}>
-  Coming soon.
+
+<Accordion title="How this was built" defaultOpen={false}>
+  `StatCounter` uses `useRef` to grab its own DOM node, then a `useEffect` sets up an `IntersectionObserver` watching that node. The first time it becomes at least 30% visible, a `requestAnimationFrame` loop runs for `duration` milliseconds, easing the displayed number from `0` up to `value` with an ease-out-cubic curve (`1 - (1 - progress) ** 3`) and writing each frame to state with `setDisplay`. A `started` ref guards against re-triggering if the counter scrolls in and out of view again.
+
+  Using `IntersectionObserver` instead of a raw `scroll` listener means it fires correctly even when the counter starts hidden inside a collapsed `Accordion` — the count-up plays the moment you open this section, same as it would scrolling down a normal page.
+</Accordion>
+
+<StatCounterGroup />
+
 </Accordion>

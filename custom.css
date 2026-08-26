@@ -342,6 +342,42 @@ pre.shiki,
   }
 }
 
+/* --- Animated stat counter ---
+   A real React component (react.mdx) uses an IntersectionObserver to
+   detect when each counter scrolls into view, then rAF-animates its
+   displayed number from 0 up to the target with an ease-out curve. */
+.stat-counter-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.stat-counter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 120px;
+}
+
+.stat-counter-value {
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 2rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: #22c55e;
+}
+
+.stat-counter-label {
+  font-size: 0.8rem;
+  color: rgba(226, 232, 240, 0.65);
+  text-align: center;
+}
+
 /* --- Color swatches for the "colors & fonts" accordions --- */
 .color-swatch {
   display: inline-block;
