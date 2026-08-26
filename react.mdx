@@ -3,6 +3,57 @@ title: "React"
 description: "Kenny's React playground — small interactive projects for learning Mintlify"
 ---
 
+export const CopySnippet = () => {
+  const [copied, setCopied] = useState(false)
+  const code = "npm install @mintlify/cli"
+
+  const handleCopy = () => {
+    navigator.clipboard.writeText(code).then(() => {
+      setCopied(true)
+      setTimeout(() => setCopied(false), 1800)
+    })
+  }
+
+  return (
+    <div className="copy-snippet not-prose">
+      <code className="copy-snippet-code">{code}</code>
+      <button
+        type="button"
+        className={"copy-snippet-btn" + (copied ? " copied" : "")}
+        onClick={handleCopy}
+        aria-label={copied ? "Copied to clipboard" : "Copy to clipboard"}
+      >
+        {copied ? (
+          <svg viewBox="0 0 24 24" className="copy-snippet-icon pop">
+            <path
+              className="copy-snippet-check"
+              d="M5 13l4 4L19 7"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        ) : (
+          <svg viewBox="0 0 24 24" className="copy-snippet-icon">
+            <rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" strokeWidth="2" />
+            <path
+              d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        )}
+        {copied && <span className="copy-snippet-tooltip">Copied!</span>}
+      </button>
+    </div>
+  )
+}
+
 export const FeedbackWidget = () => {
   const [feedback, setFeedback] = useState(null)
 
@@ -56,7 +107,15 @@ export const FeedbackWidget = () => {
 </Accordion>
 
 <Accordion title="Copy to clipboard button" defaultOpen={false}>
-  Coming soon.
+
+<Accordion title="How this was built" defaultOpen={false}>
+  Another inline component, `CopySnippet`, using `useState` for a `copied` boolean. Clicking the button calls `navigator.clipboard.writeText(code)`; once that promise resolves, `copied` flips to `true`, which swaps the button's icon from a copy glyph to a checkmark and shows a floating "Copied!" tooltip. A `setTimeout` flips it back after 1.8 seconds.
+
+  The checkmark path animates in with the same `stroke-dasharray` / `stroke-dashoffset` trick as the feedback widget's checkmark, plus a small spring `scale()` pop on the icon itself — both defined in `custom.css`.
+</Accordion>
+
+<CopySnippet />
+
 </Accordion>
 
 <Accordion title="Animated stat counter" defaultOpen={false}>
