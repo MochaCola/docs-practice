@@ -1,0 +1,136 @@
+/* ============================================================
+   Custom code block theme — "Aurora"
+   Overrides Mintlify's css-variables codeblock theme
+   (enabled via styling.codeblocks.theme in docs.json)
+
+   Mintlify's own codeblock chrome (.bg-codeblock) always renders
+   dark regardless of site light/dark mode, so this theme commits
+   to one deliberate dark palette instead of fighting that default.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap");
+
+:root {
+  --mint-background: #0f172a;
+  --mint-foreground: #e2e8f0;
+
+  --mint-token-comment: #64748b;
+  --mint-token-constant: #fbbf24;
+  --mint-token-string: #4ade80;
+  --mint-token-string-expression: #4ade80;
+  --mint-token-keyword: #c084fc;
+  --mint-token-parameter: #fbbf24;
+  --mint-token-function: #60a5fa;
+  --mint-token-punctuation: #94a3b8;
+  --mint-token-link: #22c55e;
+}
+
+pre.shiki,
+.bg-codeblock {
+  background-color: var(--mint-background) !important;
+}
+
+/* --- Named palettes ---
+   --mint-token-* are inherited CSS custom properties, so wrapping a
+   code block in one of these classes overrides the palette for just
+   that block. .theme-aurora just restates the :root default so every
+   themed block can be wrapped the same way, for consistency. */
+.theme-aurora {
+  --mint-background: #0f172a;
+  --mint-foreground: #e2e8f0;
+
+  --mint-token-comment: #64748b;
+  --mint-token-constant: #fbbf24;
+  --mint-token-string: #4ade80;
+  --mint-token-string-expression: #4ade80;
+  --mint-token-keyword: #c084fc;
+  --mint-token-parameter: #fbbf24;
+  --mint-token-function: #60a5fa;
+  --mint-token-punctuation: #94a3b8;
+  --mint-token-link: #22c55e;
+}
+
+.theme-sunset {
+  --mint-background: #1a1025;
+  --mint-foreground: #f4e4e0;
+
+  --mint-token-comment: #9a7f8f;
+  --mint-token-constant: #ff8787;
+  --mint-token-string: #ffd93d;
+  --mint-token-string-expression: #ffd93d;
+  --mint-token-keyword: #ff6b9d;
+  --mint-token-parameter: #ff8787;
+  --mint-token-function: #ffa94d;
+  --mint-token-punctuation: #c9a0b5;
+  --mint-token-link: #ff6b9d;
+}
+
+.theme-ocean {
+  --mint-background: #0a1e26;
+  --mint-foreground: #d6e8f0;
+
+  --mint-token-comment: #5c8a99;
+  --mint-token-constant: #f6ad55;
+  --mint-token-string: #81e6d9;
+  --mint-token-string-expression: #81e6d9;
+  --mint-token-keyword: #4fd1c5;
+  --mint-token-parameter: #f6ad55;
+  --mint-token-function: #63b3ed;
+  --mint-token-punctuation: #90cdf4;
+  --mint-token-link: #38bdf8;
+}
+
+/* --- Color swatches for the "colors & fonts" accordions --- */
+.color-swatch {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+  vertical-align: middle;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Font + shape --- */
+pre,
+pre code {
+  font-family: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace !important;
+  font-size: 0.85rem !important;
+  line-height: 1.65 !important;
+}
+
+/* Shiki emits inline styles, not token classes, so match on the CSS
+   variable reference inside the style attribute itself. */
+pre span[style*="mint-token-comment"] {
+  font-style: italic;
+}
+
+pre {
+  border-radius: 12px !important;
+  border: 1px solid color-mix(in srgb, var(--mint-token-link) 25%, transparent);
+  box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.25);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+pre:hover {
+  border-color: color-mix(in srgb, var(--mint-token-link) 55%, transparent);
+}
+
+/* Themed scrollbar for overflowing code lines */
+pre::-webkit-scrollbar {
+  height: 8px;
+}
+
+pre::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+pre::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--mint-token-link) 45%, transparent);
+  border-radius: 8px;
+}
+
+pre::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in srgb, var(--mint-token-link) 70%, transparent);
+}

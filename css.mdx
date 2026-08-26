@@ -1,47 +1,107 @@
 ---
 title: "CSS"
-description: "For Kenny to mess around with CSS"
+description: "Kenny's CSS playground — small styling projects for learning Mintlify"
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
+<Accordion title="Code block styling" defaultOpen={false}>
 
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
+<Accordion title="How this was built" defaultOpen={false}>
+  Mintlify renders code blocks with [Shiki](https://shiki.style) and exposes syntax colors as CSS variables when `styling.codeblocks.theme` is set to `css-variables` in [`docs.json`](https://mintlify.com/docs/create/code).
 
-## Prerequisites
+  [`custom.css`](https://mintlify.com/docs/customize/custom-scripts#custom-css) at the project root is picked up automatically — no import needed — and overrides those `--mint-token-*` variables, swaps the font to [JetBrains Mono](https://www.jetbrains.com/lp/mono/), and adds a themed border, glow, and scrollbar.
 
-Before you begin, you must have:
+  `--mint-token-*` are inherited CSS custom properties, so wrapping a code block in `<div className="theme-name">` overrides the palette for just that block — the site-wide default in `:root` stays untouched everywhere else.
+</Accordion>
 
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
+<Accordion title="Aurora — colors & fonts" defaultOpen={false}>
+  - <span className="color-swatch" style={{backgroundColor: "#0f172a"}} /> Background `#0f172a`
+  - <span className="color-swatch" style={{backgroundColor: "#c084fc"}} /> Keyword `#c084fc`
+  - <span className="color-swatch" style={{backgroundColor: "#60a5fa"}} /> Function `#60a5fa`
+  - <span className="color-swatch" style={{backgroundColor: "#4ade80"}} /> String `#4ade80`
+  - <span className="color-swatch" style={{backgroundColor: "#fbbf24"}} /> Constant / parameter `#fbbf24`
+  - <span className="color-swatch" style={{backgroundColor: "#64748b"}} /> Comment `#64748b` (italic)
+  - Font: JetBrains Mono
+</Accordion>
 
-## Get started
+<div className="theme-aurora">
+<CodeGroup>
+```javascript hero.js
+// comments get a muted, italic treatment
+const greet = (name) => {
+  const message = `Hello, ${name}!`;
+  return message.trim();
+};
 
-<Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
+export const isReady = true;
+```
 
-    ```bash
-    npm install your-package
-    ```
-  </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
+```python aurora.py
+# same palette, different language
+def greet(name: str) -> str:
+    message = f"Hello, {name}!"
+    return message.strip()
 
-    ```bash
-    your-cli init
-    ```
-  </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
+is_ready = True
+```
+</CodeGroup>
+</div>
 
-    ```bash
-    your-cli start
-    ```
-  </Step>
-</Steps>
+<Accordion title="Sunset — colors & fonts" defaultOpen={false}>
+  - <span className="color-swatch" style={{backgroundColor: "#1a1025"}} /> Background `#1a1025`
+  - <span className="color-swatch" style={{backgroundColor: "#ff6b9d"}} /> Keyword `#ff6b9d`
+  - <span className="color-swatch" style={{backgroundColor: "#ffa94d"}} /> Function `#ffa94d`
+  - <span className="color-swatch" style={{backgroundColor: "#ffd93d"}} /> String `#ffd93d`
+  - <span className="color-swatch" style={{backgroundColor: "#ff8787"}} /> Constant / parameter `#ff8787`
+  - <span className="color-swatch" style={{backgroundColor: "#9a7f8f"}} /> Comment `#9a7f8f` (italic)
+  - Font: JetBrains Mono
+</Accordion>
 
-<Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
+<div className="theme-sunset">
+<CodeGroup>
+```javascript sunset.js
+// warm palette: pink keywords, orange functions, yellow strings
+const launch = (destination) => {
+  const eta = `arriving at ${destination} soon`;
+  return eta.toUpperCase();
+};
+```
 
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
-</Tip>
+```python sunset.py
+# warm palette: pink keywords, orange functions, yellow strings
+def launch(destination: str) -> str:
+    eta = f"arriving at {destination} soon"
+    return eta.upper()
+```
+</CodeGroup>
+</div>
+
+<Accordion title="Ocean — colors & fonts" defaultOpen={false}>
+  - <span className="color-swatch" style={{backgroundColor: "#0a1e26"}} /> Background `#0a1e26`
+  - <span className="color-swatch" style={{backgroundColor: "#4fd1c5"}} /> Keyword `#4fd1c5`
+  - <span className="color-swatch" style={{backgroundColor: "#63b3ed"}} /> Function `#63b3ed`
+  - <span className="color-swatch" style={{backgroundColor: "#81e6d9"}} /> String `#81e6d9`
+  - <span className="color-swatch" style={{backgroundColor: "#f6ad55"}} /> Constant / parameter `#f6ad55`
+  - <span className="color-swatch" style={{backgroundColor: "#5c8a99"}} /> Comment `#5c8a99` (italic)
+  - Font: JetBrains Mono
+</Accordion>
+
+<div className="theme-ocean">
+<CodeGroup>
+```javascript ocean.js
+// cool palette: teal keywords, sky-blue functions, aqua strings
+const dive = (depth) => {
+  const status = `descending to ${depth}m`;
+  return status.toUpperCase();
+};
+```
+
+```python ocean.py
+# cool palette: teal keywords, sky-blue functions, aqua strings
+def dive(depth: int) -> str:
+    status = f"descending to {depth}m"
+    return status.upper()
+```
+</CodeGroup>
+</div>
+
+</Accordion>
