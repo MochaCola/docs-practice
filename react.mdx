@@ -1,47 +1,64 @@
 ---
 title: "React"
-description: "For Kenny to mess around with React"
+description: "Kenny's React playground — small interactive projects for learning Mintlify"
 ---
 
-Describe how someone begins using your product. What is the first thing they need to do? Are there any prerequisites?
+export const FeedbackWidget = () => {
+  const [feedback, setFeedback] = useState(null)
 
-A quickstart should take someone from zero to using your product. They'll get a quick win and a sense of what they can accomplish.
+  return (
+    <div className="feedback-widget not-prose">
+      {feedback === null ? (
+        <div className="feedback-prompt">
+          <span className="feedback-question">Was this page helpful?</span>
+          <div className="feedback-buttons">
+            <button
+              type="button"
+              className="feedback-btn"
+              aria-label="Yes, this page was helpful"
+              onClick={() => setFeedback("yes")}
+            >
+              👍
+            </button>
+            <button
+              type="button"
+              className="feedback-btn"
+              aria-label="No, this page was not helpful"
+              onClick={() => setFeedback("no")}
+            >
+              👎
+            </button>
+          </div>
+        </div>
+      ) : (
+        <div className="feedback-confirm" role="status">
+          <svg className="feedback-check" viewBox="0 0 52 52">
+            <circle className="feedback-check-circle" cx="26" cy="26" r="24" />
+            <path className="feedback-check-mark" d="M14 27l7 7 17-17" />
+          </svg>
+          <span>{feedback === "yes" ? "Thanks for the feedback!" : "Thanks — we'll work on it."}</span>
+        </div>
+      )}
+    </div>
+  )
+}
 
-## Prerequisites
+<Accordion title="Docs feedback widget" defaultOpen={false}>
 
-Before you begin, you must have:
+<Accordion title="How this was built" defaultOpen={false}>
+  This is a real React component, declared inline right in the MDX file with `export const FeedbackWidget = () => {...}`. Mintlify pre-injects hooks like `useState` into MDX — no `import` needed, and no separate `/snippets/` file required for a component this small.
 
-- Requirement one (for example, Node.js 18+, a free account, an API key)
-- Requirement two (for example, a compatible device, a compatible browser, a compatible operating system)
+  Clicking a thumb sets `feedback` to `"yes"` or `"no"`, which swaps the rendered JSX from the prompt to a confirmation view. The checkmark is an inline SVG whose circle and check mark draw themselves in with `stroke-dasharray` / `stroke-dashoffset` animations, defined in `custom.css`.
+</Accordion>
 
-## Get started
+<FeedbackWidget />
 
-<Steps>
-  <Step title="Install">
-    Describe how to install your product or sign up.
+</Accordion>
 
-    ```bash
-    npm install your-package
-    ```
-  </Step>
-  <Step title="Configure">
-    Describe any setup or configuration needed before first use.
+<Accordion title="Copy to clipboard button" defaultOpen={false}>
+  Coming soon.
+</Accordion>
 
-    ```bash
-    your-cli init
-    ```
-  </Step>
-  <Step title="Run it">
-    Show the first thing a user does to see it working.
-
-    ```bash
-    your-cli start
-    ```
-  </Step>
-</Steps>
-
-<Tip>
-  Give people a way to get help. This could be a link to a support page, a chat with a customer support agent, or a forum for your product.
-
-  Example: Need help? Reach out to us at [support@yourcompany.com](mailto:support@yourcompany.com).
-</Tip>
+<Accordion title="Animated stat counter" defaultOpen={false}>
+  Coming soon.
+</Accordion>
