@@ -105,3 +105,33 @@ def dive(depth: int) -> str:
 </div>
 
 </Accordion>
+
+<Accordion title="Hover interactive cards" defaultOpen={false}>
+
+<Accordion title="How this was built" defaultOpen={false}>
+  Mintlify renders each `<Card>` as a plain `.card` div inside a `.card-group` grid — both real, stable class names, not scoped/hashed, so `custom.css` can target them directly.
+
+  Each card below is individually wrapped in its own `<div className="card-tilt">` (or `card-glow` / `card-lift`), and each wrapper class defines exactly one effect, scoped as `.card-tilt .card:hover`: tilt is a `perspective()` + `rotateX`/`rotateY` transform and nothing else, glow is a radial `box-shadow` halo with no movement, and lift is a straight `translateY(-14px)` with a grounding drop shadow — no rotation or glow on either. The icon (an SVG using a CSS mask, not a fill) recolors on all three via `.card:hover svg`.
+
+  It's pure CSS — no JavaScript — so the tilt is a fixed angle rather than one that follows the cursor.
+</Accordion>
+
+<CardGroup cols={3}>
+  <div className="card-tilt">
+    <Card title="Tilt" icon="cube">
+      Hover for a 3D rotation only.
+    </Card>
+  </div>
+  <div className="card-glow">
+    <Card title="Glow" icon="sparkles">
+      Hover for a soft accent halo only.
+    </Card>
+  </div>
+  <div className="card-lift">
+    <Card title="Lift" icon="arrow-up">
+      Hover to lift straight off the page.
+    </Card>
+  </div>
+</CardGroup>
+
+</Accordion>
