@@ -19,9 +19,9 @@
         "group": "Getting Started",
         "pages": [
           "index",
-          "quickstart",
           "css",
-          "react"
+          "react",
+          "about"
         ]
       }
     ],

@@ -432,3 +432,44 @@ pre::-webkit-scrollbar-thumb {
 pre::-webkit-scrollbar-thumb:hover {
   background: color-mix(in srgb, var(--mint-token-link) 70%, transparent);
 }
+
+/* --- Custom scrollbar (site-wide) ---
+   Firefox reads scrollbar-width/scrollbar-color on html. Chrome,
+   Safari, and Edge use the ::-webkit-scrollbar* pseudo-elements
+   instead, set globally here so every scrollable area on the site
+   picks it up. pre keeps its own more-specific rules above, which
+   win over these thanks to the extra tag selector. */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(34, 197, 94, 0.5) transparent;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(34, 197, 94, 0.5);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(34, 197, 94, 0.75);
+  background-clip: padding-box;
+}
+
+/* Bounded demo box for the "Custom scrollbar" section in css.mdx */
+.scroll-demo {
+  height: 160px;
+  overflow-y: auto;
+  padding: 0.25rem 1.25rem;
+  border-radius: 12px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}

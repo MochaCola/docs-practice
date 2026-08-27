@@ -135,3 +135,26 @@ def dive(depth: int) -> str:
 </CardGroup>
 
 </Accordion>
+
+<Accordion title="Custom scrollbar" defaultOpen={false}>
+
+<Accordion title="How this was built" defaultOpen={false}>
+  Two APIs, set globally on `html` in `custom.css`, cover every browser: Firefox reads the standard `scrollbar-width` / `scrollbar-color` properties, while Chrome, Safari, and Edge use the older `::-webkit-scrollbar`, `::-webkit-scrollbar-track`, and `::-webkit-scrollbar-thumb` pseudo-elements. Setting both themes the scrollbar everywhere on the site — including the browser window's own scrollbar, not just inside a bounded container like the one below.
+
+  Code blocks keep the separate, thinner scrollbar from the "Code block styling" section above — `pre::-webkit-scrollbar` wins there since a tag + pseudo-element selector beats the sitewide `::-webkit-scrollbar` rule on specificity.
+</Accordion>
+
+<div className="scroll-demo not-prose">
+
+1. Scroll inside this box
+2. Same green theme as the rest of the site
+3. Firefox: `scrollbar-width` + `scrollbar-color`
+4. Everywhere else: `::-webkit-scrollbar*`
+5. Applied globally on `html`, so the browser window's own scrollbar matches too
+6. Rounded thumb, transparent track
+7. Hover the thumb for a brighter green
+8. Almost there
+9. Last one — you found the bottom
+</div>
+
+</Accordion>
