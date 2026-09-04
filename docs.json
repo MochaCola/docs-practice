@@ -13,6 +13,9 @@
       "theme": "css-variables"
     }
   },
+  "feedback": {
+    "thumbsRating": true
+  },
   "navigation": {
     "pages": [
       {
@@ -21,6 +24,7 @@
           "index",
           "css",
           "react",
+          "test",
           "about"
         ]
       }

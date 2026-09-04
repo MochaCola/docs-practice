@@ -1,0 +1,18 @@
+---
+title: "Test"
+description: "Kenny's playground for Mintlify's native feedback toolbar"
+---
+
+<Accordion title="Feedback toolbar restyle" defaultOpen={false}>
+
+<Accordion title="How this was built" defaultOpen={false}>
+  Unlike the [React demo](/react)'s hand-built `FeedbackWidget`, this is Mintlify's own native "Was this page helpful?" toolbar — turned on with `feedback.thumbsRating` in [`docs.json`](https://mintlify.com/docs/organize/settings) and rendered automatically at the bottom of every page's content, not placed inline via MDX.
+
+  Mintlify marks whichever thumb you click with a `.border-gray-500` class. `custom.css` targets `#feedback-thumbs-up.border-gray-500` / `#feedback-thumbs-down.border-gray-500` to recolor just the selected vote Xbox green (`#107c10`), leaving the unselected thumb untouched.
+
+  The confirmation copy is swapped the same way the scrollbar demo restyles a native element: `font-size: 0` hides Mintlify's default text without touching markup we don't control, then a `::after` pseudo-element renders our own message in its place.
+</Accordion>
+
+Scroll to the bottom of this page and vote 👍 or 👎 to see it in action.
+
+</Accordion>

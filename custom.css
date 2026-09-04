@@ -473,3 +473,39 @@ html {
   border-radius: 12px;
   border: 1px solid rgba(148, 163, 184, 0.25);
 }
+
+/* --- Native feedback toolbar (test.mdx) ---
+   Mintlify renders this toolbar itself at the bottom of every page's
+   content once feedback.thumbsRating is enabled in docs.json — unlike
+   the hand-built widget above, .feedback-toolbar and its children are
+   Mintlify's own markup, not ours. It marks whichever thumb was
+   clicked with a .border-gray-500 class, so that's what we target to
+   turn the selected vote Xbox green instead of Mintlify's default. */
+.feedback-toolbar #feedback-thumbs-up.border-gray-500,
+.feedback-toolbar #feedback-thumbs-down.border-gray-500 {
+  background-color: #107c10 !important;
+  border-color: #107c10 !important;
+  color: #fff !important;
+}
+
+.feedback-toolbar #feedback-thumbs-up.border-gray-500 small,
+.feedback-toolbar #feedback-thumbs-down.border-gray-500 small {
+  font-weight: 700;
+}
+
+/* Visually replace the default "thanks for your feedback" copy with
+   our own — font-size: 0 hides the original text without touching
+   the DOM Mintlify controls, then ::after renders replacement copy. */
+.feedback-toolbar
+  .contextual-feedback-container
+  > p.contextual-feedback-form-title {
+  font-size: 0;
+}
+
+.feedback-toolbar
+  .contextual-feedback-container
+  > p.contextual-feedback-form-title::after {
+  content: "Thank you for your feedback.";
+  font-size: 1rem;
+  font-weight: 500;
+}
